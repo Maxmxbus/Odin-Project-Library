@@ -1,13 +1,23 @@
 const library = [];
 
 // Book constructor
-function Book(author, title,numPages,beenRead, rating ){
-    this.author = author,
-    this.title = title,
-    this.numPages = numPages,
-    this.beenRead = beenRead,
-    this.rating = rating;
-};
+
+class Book{
+    constructor(author, title,numPages,beenRead, rating ){
+        this.author = author,
+        this.title = title,
+        this.numPages = numPages,
+        this.beenRead = beenRead,
+        this.rating = rating;
+    }
+}
+// function Book(author, title,numPages,beenRead, rating ){
+//     this.author = author,
+//     this.title = title,
+//     this.numPages = numPages,
+//     this.beenRead = beenRead,
+//     this.rating = rating;
+// };
 
 function addToLibrary() {
     const createCardForm = document.querySelector(".createCard");
