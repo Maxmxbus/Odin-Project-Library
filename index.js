@@ -1,31 +1,57 @@
 const library = [];
 
 // Book constructor
-function Book(author, title,numPages,beenRead, rating ){
+function Book(author, title, numPages, beenRead, rating) {
     this.author = author,
-    this.title = title,
-    this.numPages = numPages,
-    this.beenRead = beenRead,
-    this.rating = rating;
+        this.title = title,
+        this.numPages = numPages,
+        this.beenRead = beenRead,
+        this.rating = rating;
 };
 
 function addToLibrary() {
-    const createCardForm = document.querySelector(".createCard");
+    const form = document.querySelector(".createCard");
 
-    createCardForm.addEventListener("submit", (e) => {
+    const auth_error = document.getElementById("auth_error");
+    const title_error = document.getElementById("title_error");
+    const num_error = document.getElementById("num_error");
+
+
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
+
         const author = document.querySelector("#author").value;
         const title = document.querySelector("#title").value;
         const numPages = document.querySelector("#numPages").value;
         const beenRead = document.querySelector("#beenRead").checked;
         const rating = document.querySelector("#rate").value;
 
-        const book = new Book(author, title, numPages, beenRead, rating);
+        auth_error.innerHTML = '';
+        title_error.innerHTML = '';
+        num_error.innerHTML = '';
 
-        library.push(book);
-        createCardForm.reset();
-        displayLibrary();
-        console.log(library);
+        let valid = true;
+
+        if(author === '' || author == null) {
+            valid = false;
+            auth_error.innerHTML = 'Please enter an author';
+        }
+        if(title === '' || title == null){
+            valid = false;
+            title_error.innerHTML = 'Please enter a title';
+        }
+        if(numPages === '' || numPages == null){
+            valid = false;
+            num_error.innerHTML = 'Please enter a number of pages';
+        }
+
+        if(valid){
+            const book = new Book(author, title, numPages, beenRead, rating);
+            library.push(book);
+            form.reset();
+            displayLibrary();
+        }
+
     });
 }
 
@@ -52,13 +78,13 @@ function displayLibrary() {
 
         // Add event listener to the delete button
         const deleteBtn = cardElement.querySelector(".delete");
-        deleteBtn.addEventListener('click', function() {
+        deleteBtn.addEventListener('click', function () {
             // Remove the book from the library array
             library.splice(i, 1);
-            
+
             // Remove the card from the DOM
             cardElement.remove();
-            
+
             // Re-display the library to update indexes
             displayLibrary();
         });

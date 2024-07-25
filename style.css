@@ -110,6 +110,10 @@ body{
     background: var(--secondaryCol);
     color: var(--colorSub);
 }
+.card:hover{
+    transition: 1s;
+    transform:translateZ(0) scale(1.2);
+}
 .auth{
     align-self: center;
 }
